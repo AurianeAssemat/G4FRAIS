@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `Visiteur` (
 -- Structure de la table `FicheFrais`
 --
 
-CREATE TABLE IF NOT EXISTS `fichefrais` (
+CREATE TABLE IF NOT EXISTS `FicheFrais` (
   `idVisiteur` char(4) NOT NULL,
   `mois` char(6) NOT NULL,
   `nbJustificatifs` int(11) DEFAULT NULL,
