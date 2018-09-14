@@ -18,8 +18,8 @@
 clASs PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=G4FRAIS';   		
-      	private static $user='ADM_G4FRAIS' ;    		
-      	private static $mdp='judalina' ;	
+      	private static $user='USR_G4FRAIS' ;    		
+      	private static $mdp='G4fr@is' ;	
 		private static $monPdo;
 		private static $monPdoGsb=null;
 /**
