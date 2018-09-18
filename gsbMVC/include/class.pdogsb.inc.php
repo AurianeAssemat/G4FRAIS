@@ -231,7 +231,7 @@ clASs PdoGsb{
 */
 	public function creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$date,$montant){
 		$dateFr = dateFrancaisVersAnglais($date);
-		$req = "INSERT INTO LigneFraisHorsForfait ()
+		$req = "INSERT INTO LigneFraisHorsForfait (`idVisiteur`,`mois`,`libelle`,`date`,`montant`)
 		VALUES('$idVisiteur','$mois','$libelle','$dateFr','$montant')";
 		PdoGsb::$monPdo->exec($req);
 	}
