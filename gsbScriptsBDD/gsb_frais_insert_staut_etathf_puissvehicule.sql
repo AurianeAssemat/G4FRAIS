@@ -61,3 +61,5 @@ UPDATE Visiteur SET Visiteur.idPuissVehicule = "6cvE"
 WHERE Visiteur.ville LIKE "L%"
 OR Visiteur.ville LIKE "G%"; 
 
+ALTER TABLE LigneFraisHorsForfait 
+ADD idEtatHF char(4) DEFAULT 'EAJU';
