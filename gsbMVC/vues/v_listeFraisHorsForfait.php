@@ -38,7 +38,7 @@
             </legend>
             <p>
               <label for="txtDateHF">Date (jj/mm/aaaa): </label>
-              <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
+              <input type="date" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
             </p>
             <p>
               <label for="txtLibelleHF">Libellé</label>
@@ -46,7 +46,7 @@
             </p>
             <p>
               <label for="txtMontantHF">Montant : </label>
-              <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
+              <input type="number" id="txtMontantHF" name="montant" size="10" min="0" max="999" maxlength="10" value="" />
             </p>
           </fieldset>
       </div>

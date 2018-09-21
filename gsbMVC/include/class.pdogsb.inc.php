@@ -54,8 +54,8 @@ clASs PdoGsb{
  * @return l'id, le nom et le prénom sous la forme d'un tableau ASsociatif 
 */
 	public function getInfosVisiteur($login, $mdp){
-		$req = "SELECT Visiteur.id AS id, Visiteur.nom AS nom, Visiteur.prenom AS prenom FROM Visiteur 
-		WHERE Visiteur.login='$login' AND Visiteur.mdp='$mdp'";
+		$req = "SELECT Visiteur.id AS id, Visiteur.nom AS nom, Visiteur.prenom AS prenom, Statut.libelle AS statut FROM Visiteur, Statut 
+		WHERE Visiteur.idStatut = Statut.id AND Visiteur.login='$login' AND Visiteur.mdp='$mdp'";
 		$rs = PdoGsb::$monPdo->query($req);
 		$ligne = $rs->fetch();
 		return $ligne;
@@ -103,14 +103,15 @@ clASs PdoGsb{
  * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau ASsociatif 
 */
 	public function getLesFraisHorsForfait($idVisiteur,$mois){
-	    $req = "SELECT * FROM LigneFraisHorsForfait WHERE LigneFraisHorsForfait.idVisiteur ='$idVisiteur' 
-		AND LigneFraisHorsForfait.mois = '$mois' ";	
+	    $req = "SELECT LigneFraisHorsForfait.*, EtatHorsForfait.libelle AS etat FROM LigneFraisHorsForfait, EtatHorsForfait 
+		WHERE EtatHorsForfait.id = LigneFraisHorsForfait.idEtatHF 
+		AND LigneFraisHorsForfait.idVisiteur ='$idVisiteur' AND LigneFraisHorsForfait.mois = '$mois' ";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		$nbLignes = count($lesLignes);
 		for ($i=0; $i<$nbLignes; $i++){
 			$date = $lesLignes[$i]['date'];
-			$lesLignes[$i]['date'] =  dateAnglaisVersFrancais($date);
+			$lesLignes[$i]['date'] = dateAnglaisVersFrancais($date);
 		}
 		return $lesLignes; 
 	}
