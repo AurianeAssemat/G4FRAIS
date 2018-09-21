@@ -64,7 +64,7 @@ CREATE TABLE EtatHorsForfait (
 --
 
 ALTER TABLE LigneFraisHorsForfait 
-ADD idEtatHF char(4);
+ADD idEtatHF char(4) DEFAULT 'EAJU';
 
 ALTER TABLE LigneFraisHorsForfait 
 ADD CONSTRAINT FK_idEtatHF FOREIGN KEY (idEtatHF) REFERENCES EtatHorsForfait(id);
