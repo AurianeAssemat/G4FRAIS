@@ -15,9 +15,11 @@
 
 --
 -- Update de la table `Visiteur`
---
---Avant d'insérer le script il faut augmenter le nombre de caractère pour le champs mdp.
 
 
-UPDATE visiteur
-set mdp = md5(mdp)
+ALTER TABLE Visiteur MODIFY mdp varchar(50);
+
+UPDATE Visiteur
+set mdp = md5(mdp);
+
+
