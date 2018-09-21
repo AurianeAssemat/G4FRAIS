@@ -19,7 +19,7 @@ clASs PdoGsb{
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=G4FRAIS';   		
       	private static $user='USR_G4FRAIS' ;    		
-      	private static $mdp='G4fr@is' ;	
+      	private static $mdp='G4fr@is' ;		
 		private static $monPdo;
 		private static $monPdoGsb=null;
 /**
@@ -60,7 +60,37 @@ clASs PdoGsb{
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
-
+	
+/**
+ * Retourne les informations d'un visiteur
+ 
+ * @param $id 
+ * @return l'id, le nom et le prénom sous la forme d'un tableau ASsociatif 
+*/
+	public function getInfosVisiteurId($id){
+		$req = "SELECT Visiteur.id AS id, Visiteur.nom AS nom, Visiteur.prenom AS prenom FROM Visiteur 
+		WHERE Visiteur.id='$id' ";
+		$rs = PdoGsb::$monPdo->query($req);
+		$ligne = $rs->fetch();
+		return $ligne;
+	}
+	
+/**
+ * Retourne les informations d'un visiteur
+ 
+ * @param $login 
+ * @param $mdp
+ * @return l'id, le nom et le prénom sous la forme d'un tableau ASsociatif 
+*/
+	public function getNomVisiteur(){
+		$req = "SELECT Visiteur.id AS id, Visiteur.nom AS nom FROM Visiteur";
+		$res = PdoGsb::$monPdo->query($req);
+		
+		$lesUtilisateur = $res->fetchAll();
+		return $lesUtilisateur;
+	}
+	
+	
 /**
  * Retourne sous forme d'un tableau ASsociatif toutes les lignes de frais hors forfait
  * concernées par les deux arguments
@@ -252,6 +282,31 @@ clASs PdoGsb{
 */
 	public function getLesMoisDisponibles($idVisiteur){
 		$req = "SELECT FicheFrais.mois AS mois FROM FicheFrais WHERE FicheFrais.idVisiteur ='$idVisiteur' 
+		ORDER BY FicheFrais.mois desc ";
+		$res = PdoGsb::$monPdo->query($req);
+		$lesMois =array();
+		$laLigne = $res->fetch();
+		while($laLigne != null)	{
+			$mois = $laLigne['mois'];
+			$numAnnee =substr( $mois,0,4);
+			$numMois =substr( $mois,4,2);
+			$lesMois["$mois"]=array(
+		     "mois"=>"$mois",
+		    "numAnnee"  => "$numAnnee",
+			"numMois"  => "$numMois"
+             );
+			$laLigne = $res->fetch(); 		
+		}
+		return $lesMois;
+	}
+	
+/**
+ * Retourne tout les mois ou il y a une fiche de frais fiche de frais
+
+ * @return un tableau ASsociatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant 
+*/
+	public function getToutLesMoisDisponibles(){
+		$req = "SELECT FicheFrais.mois AS mois FROM FicheFrais
 		ORDER BY FicheFrais.mois desc ";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesMois =array();
