@@ -24,7 +24,7 @@ switch($action){
 	  break;
 	}
 	case 'validerCreationFrais':{
-		$dateFrais = $_REQUEST['dateFrais'];
+		$dateFrais = dateAnglaisVersFrancais($_REQUEST['dateFrais']);
 		$libelle = $_REQUEST['libelle'];
 		$montant = $_REQUEST['montant'];
 		valideInfosFrais($dateFrais,$libelle,$montant);
