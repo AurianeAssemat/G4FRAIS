@@ -53,7 +53,7 @@
                 <td><?php echo $date ?></td>
                 <td><?php echo $libelle ?></td>
                 <td><?php echo $montant ?></td>
-				<td><?php echo $etat ?>
+				<td><?php echo $etat ?></td>
              </tr>
         <?php 
           }
