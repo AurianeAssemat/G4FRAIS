@@ -137,11 +137,11 @@ clASs PdoGsb{
  * @return l'id, le libelle et la quantité sous la forme d'un tableau ASsociatif 
 */
 	public function getLesFraisForfait($idVisiteur, $mois){
-		$req = "select fraisforfait.id as idfrais, fraisforfait.libelle as libelle, lignefraisforfait.quantite as quantite, fraisforfait.montant as montant 
-		from lignefraisforfait inner join fraisforfait 
-		on fraisforfait.id = lignefraisforfait.idfraisforfait
-		where lignefraisforfait.idvisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois' 
-		order by lignefraisforfait.idfraisforfait";	
+		$req = "SELECT FraisForfait.id as idfrais, FraisForfait.libelle as libelle, LigneFraisForfait.quantite as quantite, FraisForfait.montant as montant 
+		FROM LigneFraisForfait INNER JOIN FraisForfait 
+		ON FraisForfait.id = LigneFraisForfait.idFraisForfait
+		WHERE LigneFraisForfait.idVisiteur ='$idVisiteur' AND LigneFraisForfait.mois='$mois' 
+		ORDER BY LigneFraisForfait.idFraisForfait";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes; 
@@ -189,7 +189,7 @@ clASs PdoGsb{
 */
 	
 	public function getTarifKilometrique($idVisiteur){
-		$req = "SELECT puissvehicule.tarif AS tarif FROM puissvehicule ,Visiteur WHERE Visiteur.id = '$idVisiteur' AND Visiteur.idPuissVehicule = puissvehicule.id";
+		$req = "SELECT PuissVehicule.tarif AS tarif FROM PuissvVehicule ,Visiteur WHERE Visiteur.id = '$idVisiteur' AND Visiteur.idPuissVehicule = PuissVehicule.id";
 		$res = PdoGsb::$monPdo->query($req);
 		$tarifreq = $res->fetch();
 		return $tarifreq['tarif'];
