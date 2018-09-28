@@ -1,2 +1,0 @@
-ALTER TABLE LigneFraisHorsForfait 
-ADD idEtatHF char(4);
