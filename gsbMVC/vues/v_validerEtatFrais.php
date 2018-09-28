@@ -1,4 +1,6 @@
-﻿
+﻿<?php   
+if($_SESSION['statut'] == "Comptable"){
+?>
 <h3>Fiche de frais du mois <?php echo $numMois."-".$numAnnee?> pour l'utilisateur <?php echo $lUtilisateur['nom']?> : 
     </h3>
     <div class="encadre">
@@ -74,7 +76,7 @@
   </div>
   </div>
  
-
+<?php }?>
 
 
 
