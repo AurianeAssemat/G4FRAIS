@@ -189,7 +189,7 @@ clASs PdoGsb{
 */
 	
 	public function getTarifKilometrique($idVisiteur){
-		$req = "SELECT PuissVehicule.tarif AS tarif FROM PuissvVehicule ,Visiteur WHERE Visiteur.id = '$idVisiteur' AND Visiteur.idPuissVehicule = PuissVehicule.id";
+		$req = "SELECT PuissVehicule.tarif AS tarif FROM PuissVehicule ,Visiteur WHERE Visiteur.id = '$idVisiteur' AND Visiteur.idPuissVehicule = PuissVehicule.id";
 		$res = PdoGsb::$monPdo->query($req);
 		$tarifreq = $res->fetch();
 		return $tarifreq['tarif'];
