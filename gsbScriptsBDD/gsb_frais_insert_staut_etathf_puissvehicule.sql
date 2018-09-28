@@ -62,4 +62,4 @@ WHERE Visiteur.ville LIKE "L%"
 OR Visiteur.ville LIKE "G%"; 
 
 ALTER TABLE LigneFraisHorsForfait 
-ADD idEtatHF char(4) DEFAULT 'EAJU';
+MODIFY idEtatHF char(4) DEFAULT 'EAJU';
