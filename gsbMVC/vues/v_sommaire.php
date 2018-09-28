@@ -18,15 +18,20 @@
 			<li class="smenu">
 				<a href="index.php?uc=etatFrais&action=selectionnerMois" title="Consultation de mes fiches de frais">Mes fiches de frais</a>
 			</li>
-			
+			<?php   
+				if($_SESSION['statut'] == "Comptable"){
+			?>
 			<li class="smenu">
 				<a href="index.php?uc=validerFrais&action=selectionnerMoisUtilisateur" title="Valider fiches de frais">Valider fiches de frais</a>
 			</li>
 			
-			
+			<?php   
+				}
+			?>
 			<li class="smenu">
 				<a href="index.php?uc=connexion&action=deconnexion" title="Se déconnecter">Déconnexion</a>
 			</li>
+			
          </ul>
         
     </div>
