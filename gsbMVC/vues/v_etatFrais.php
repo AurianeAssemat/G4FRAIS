@@ -9,28 +9,44 @@
     </p>
   	<table class="listeLegere">
   	   <caption>Eléments forfaitisés </caption>
-        <tr>
+         <tr>
+			<td></td>
+			<td>QTE</td>
+			<td>PRIX</td>
+			<td>TOT</td>
+		 </tr>
          <?php
          foreach ( $lesFraisForfait as $unFraisForfait ) 
 		 {
-			$libelle = $unFraisForfait['libelle'];
-		?>	
-			<th> <?php echo $libelle?></th>
+			 $idFrais = $unFraisForfait['idfrais'];
+			 
+			 ?>
+			 <tr>
+			 <th><?php $libelle = $unFraisForfait['libelle']; 
+			 echo $libelle; ?> </th>
+			 <td><?php $quantite = $unFraisForfait['quantite'];
+			 echo $quantite; ?></td>
+			 <td><?php 
+			 if($idFrais == 'KM')
+			 {
+				echo $tarif;
+			 }else{
+					$montant = $unFraisForfait['montant'];
+					echo $montant; 
+			 }?></td>
+			 <td><?php 
+			 if($idFrais == 'KM')
+			 {
+				echo $tarif * $quantite;
+			 }else{
+				echo $montant * $quantite;
+			 }?></td>
+			
+			</tr>
 		 <?php
         }
 		?>
-		</tr>
-        <tr>
-        <?php
-          foreach (  $lesFraisForfait as $unFraisForfait  ) 
-		  {
-				$quantite = $unFraisForfait['quantite'];
-		?>
-                <td class="qteForfait"><?php echo $quantite?> </td>
-		 <?php
-          }
-		?>
-		</tr>
+		
     </table>
   	<table class="listeLegere">
   	   <caption>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus -

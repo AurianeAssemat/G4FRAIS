@@ -8,19 +8,38 @@
             <legend>Eléments forfaitisés
             </legend>
 			<?php
+				$total=0;
 				foreach ($lesFraisForfait as $unFrais)
 				{
 					$idFrais = $unFrais['idfrais'];
 					$libelle = $unFrais['libelle'];
+					$montant = $unFrais['montant'];
 					$quantite = $unFrais['quantite'];
 			?>
 					<p>
 						<label for="idFrais"><?php echo $libelle ?></label>
-						<input type="number" id="idFrais" name="lesFrais[<?php echo $idFrais?>]" size="10" maxlength="3" min="0" max="31" value="<?php echo $quantite?>" >
+						<input type="number" id="idFrais" name="lesFrais[<?php echo $idFrais?>]" size="10" maxlength="3" min="0" max="10000" value="<?php echo $quantite?>" >
+						<?php 
+						
+						echo "*";
+						if($idFrais == 'KM')
+						{
+							$calc = $tarif * $quantite ;
+							echo $tarif;
+						}else{
+							$calc = $montant * $quantite ;
+							echo $montant; 
+						}
+						echo "€ = ".$calc." €";
+						
+						$total=$total+$calc;
+
+						?>
 					</p>
 			
 			<?php
 				}
+				echo "Total: ".$total." €";
 			?>
 			
 			

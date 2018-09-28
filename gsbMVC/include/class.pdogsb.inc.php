@@ -18,8 +18,8 @@
 clASs PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=G4FRAIS';   		
-      	private static $user='USR_G4FRAIS' ;    		
-      	private static $mdp='G4fr@is' ;		
+      	private static $user='root' ;    		
+      	private static $mdp='' ;		
 		private static $monPdo;
 		private static $monPdoGsb=null;
 /**
@@ -137,11 +137,11 @@ clASs PdoGsb{
  * @return l'id, le libelle et la quantité sous la forme d'un tableau ASsociatif 
 */
 	public function getLesFraisForfait($idVisiteur, $mois){
-		$req = "SELECT FraisForfait.id AS idfrais, FraisForfait.libelle AS libelle, 
-		LigneFraisForfait.quantite AS quantite from LigneFraisForfait INNER JOIN FraisForfait 
-		ON FraisForfait.id = LigneFraisForfait.idFraisForfait
-		WHERE LigneFraisForfait.idVisiteur ='$idVisiteur' AND LigneFraisForfait.mois='$mois' 
-		ORDER BY LigneFraisForfait.idFraisForfait";	
+		$req = "select fraisforfait.id as idfrais, fraisforfait.libelle as libelle, lignefraisforfait.quantite as quantite, fraisforfait.montant as montant 
+		from lignefraisforfait inner join fraisforfait 
+		on fraisforfait.id = lignefraisforfait.idfraisforfait
+		where lignefraisforfait.idvisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois' 
+		order by lignefraisforfait.idfraisforfait";	
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes; 
@@ -178,6 +178,21 @@ clASs PdoGsb{
 			PdoGsb::$monPdo->exec($req);
 		}
 		
+	}
+
+/**
+ * Retourne le tarif kilometrique d'un Visiteur
+ * concernées par un arguments
+ 
+ * @param $idVisiteur 
+ * @return tarif
+*/
+	
+	public function getTarifKilometrique($idVisiteur){
+		$req = "SELECT puissvehicule.tarif AS tarif FROM puissvehicule ,Visiteur WHERE Visiteur.id = '$idVisiteur' AND Visiteur.idPuissVehicule = puissvehicule.id";
+		$res = PdoGsb::$monPdo->query($req);
+		$tarifreq = $res->fetch();
+		return $tarifreq['tarif'];
 	}
 /**
  * met à jour le nombre de justificatifs de la table ficheFrais
